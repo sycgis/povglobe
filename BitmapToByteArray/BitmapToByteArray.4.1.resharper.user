@@ -1,0 +1,91 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer>
+      <setting name="UsedSolutionBuilderID">0</setting>
+    </integer>
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">True</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="244" scrollPosition="0|5" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2158" scrollPosition="0|39" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="1" scrollPosition="0|0" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="244" scrollPosition="0|5" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="421" scrollPosition="0|4" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1213" scrollPosition="0|16" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1213" scrollPosition="0|16" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1278" scrollPosition="0|36" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1500" scrollPosition="0|42" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1760" scrollPosition="0|48" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2034" scrollPosition="0|39" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2158" scrollPosition="0|39" />
+    </RecentEdits>
+  </RecentFiles>
+  <UnitTestRunner>
+    <CustomStartDirectory>
+    </CustomStartDirectory>
+    <UseShadowCopy>True</UseShadowCopy>
+    <UseCustomFolder>False</UseCustomFolder>
+    <EnableUnitTesting>True</EnableUnitTesting>
+    <Providers />
+  </UnitTestRunner>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="using" priority="1" />
+      <Item value="System" priority="1" />
+      <Item value="new" priority="4" />
+      <Item value="if" priority="1" />
+      <Item value="BitmapEffectProperty" priority="1" />
+      <Item value="Bitmap" priority="1" />
+      <Item value="byte" priority="0" />
+      <Item value="bitmap" priority="2" />
+      <Item value="MemoryStream" priority="0" />
+      <Item value="bitmapBytes" priority="0" />
+      <Item value="ToString" priority="0" />
+      <Item value="textBox1" priority="4" />
+      <Item value="foreach" priority="1" />
+      <Item value="bool" priority="0" />
+      <Item value="isFirst" priority="4" />
+      <Item value="false" priority="2" />
+      <Item value="b" priority="1" />
+      <Item value="size" priority="5" />
+      <Item value="for" priority="1" />
+      <Item value="StringBuilder" priority="1" />
+      <Item value="builder" priority="3" />
+      <Item value="Width" priority="0" />
+      <Item value="j" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Microsoft.Win32.OpenFileDialog">
+      <Item value="ShowDialog" priority="0" />
+      <Item value="FileName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Controls.TextBox">
+      <Item value="Text" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Bitmap">
+      <Item value="Size" priority="0" />
+      <Item value="GetPixel" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Size">
+      <Item value="Width" priority="3" />
+      <Item value="Height" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Text.StringBuilder">
+      <Item value="Append" priority="2" />
+      <Item value="ToString" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Color">
+      <Item value="ToString" priority="0" />
+      <Item value="B" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
