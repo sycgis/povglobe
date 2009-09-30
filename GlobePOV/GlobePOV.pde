@@ -16,6 +16,7 @@ void setup()
 {
  // Serial.begin(9600);
   pinMode(2, INPUT);
+  lastSpinTime = micros();
   attachInterrupt(SpinInterrupt, spinInterrupt, FALLING);
 
   pinMode(SpinInput, INPUT);
@@ -63,27 +64,21 @@ void setup()
 }
 
 bool inInterrupt = false;
+
 void spinInterrupt()
 {
-  if(!inInterrupt)
+  if(!inInterrupt && micros()  - lastSpinTime < inturruptDebounce)
   {
     inInterrupt = true;
-    if(micros()  - lastSpinTime < inturruptDebounce)
-    {
-      unsigned long spinTime = micros() - lastSpinTime;
-//      if(spinTime < (microsPerPixelColumn * (ImageColumns/2)))
-//      {
-//        return;
-//      }
-      microsPerPixelColumn = spinTime / ImageColumns;
-      microsPerPixelEight = microsPerPixelColumn / LEDEightsCount;
-      //inturruptDebounce = max(10, spinTime / 2);
-      
-      column = 0;
-      LEDEight = 0;
-      
-      lastSpinTime = micros();
-    }
+    unsigned long spinTime = micros() - lastSpinTime;
+    
+    microsPerPixelColumn = spinTime / ImageColumns;
+    microsPerPixelEight = microsPerPixelColumn / LEDEightsCount;
+    
+    column = 0;
+    LEDEight = 0;
+    
+    lastSpinTime = micros();
     inInterrupt = false;
   }
 }
@@ -114,7 +109,7 @@ int lastEightOn = 0;
 
 char GetImageLEDEights(int eight, int column)
 {
-  return pgm_read_byte(&(Image[eight][column])); 
+  return pgm_read_byte(&(Image[column][eight])); 
 }
 
 void DrawLEDGroupsAtOnce(int eight, int column)
