@@ -1,10 +1,12 @@
+#include "WProgram.h"
+
 #include <avr/pgmspace.h>
 
 #include "Defines.h"
 
-#include "World72PixelBMPData.h"
+//#include "World72PixelBMPData.h"
 
-//#include "World2BitmapReverse.h"
+#include "World2BitmapReverse.h"
 
 //#include "TestImage1.h"
 
@@ -78,7 +80,7 @@ void spinInterrupt()
       //inturruptDebounce = max(10, spinTime / 2);
       
       column = 0;
-      row = 0;
+      LEDEight = 0;
       
       lastSpinTime = micros();
     }
@@ -117,6 +119,7 @@ char GetImageLEDEights(int eight, int column)
 
 void DrawLEDGroupsAtOnce(int eight, int column)
 {
+  unsigned long timeOfWrite = micros();
   digitalWrite(eightpins[lastEightOn][1], LEDOrientation);
   
   char imageEights = GetImageLEDEights(eight, column);
@@ -124,18 +127,18 @@ void DrawLEDGroupsAtOnce(int eight, int column)
   PORTB = (PORTB | B00110000) & ((imageEights << 4) & B00110000);
   PORTC = imageEights >> 2;
   
-//  digitalWrite(eightpins[0], bitRead(imageEights, 0));
-//  digitalWrite(eightpins[1], bitRead(imageEights, 1));
-//  digitalWrite(eightpins[2], bitRead(imageEights, 2));
-//  digitalWrite(eightpins[3], bitRead(imageEights, 3));
-//  digitalWrite(eightpins[4], bitRead(imageEights, 4));
-//  digitalWrite(eightpins[5], bitRead(imageEights, 5));
-//  digitalWrite(eightpins[6], bitRead(imageEights, 6));
-//  digitalWrite(eightpins[7], bitRead(imageEights, 7));
+//  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
+//  digitalWrite(eightpins[1][0], bitRead(imageEights, 1));
+//  digitalWrite(eightpins[2][0], bitRead(imageEights, 2));
+//  digitalWrite(eightpins[3][0], bitRead(imageEights, 3));
+//  digitalWrite(eightpins[4][0], bitRead(imageEights, 4));
+//  digitalWrite(eightpins[5][0], bitRead(imageEights, 5));
+//  digitalWrite(eightpins[6][0], bitRead(imageEights, 6));
+//  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
      
-  delayMicroseconds(microsPerPixelEight);
+  delayMicroseconds(microsPerPixelEight - (timeOfWrite - micros()));
   
   lastEightOn = eight;
 }

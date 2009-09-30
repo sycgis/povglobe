@@ -93,7 +93,7 @@ namespace BitmapToByteArray
 ",
                                              size.Width, size.Height, size.Height/8));
 
-                builder.Append("prog_uchar Image[ImageColumns][LEDEights]   PROGMEM = {");
+                builder.Append("prog_uchar Image[ImageColumns][LEDEights] PROGMEM = {");
 
                 bool isFirst = true;
                 for (int j = 0; j < size.Width; j++)
@@ -133,9 +133,9 @@ namespace BitmapToByteArray
                         builder.Append(bstring);
                     }
 
-                    builder.Append("};");
+                    builder.Append("}");
                 }
-                builder.Append(@"}
+                builder.Append(@"};
                 ");
 
                 textBox1.Text = builder.ToString();

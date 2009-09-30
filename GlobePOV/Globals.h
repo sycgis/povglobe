@@ -1,11 +1,11 @@
 volatile unsigned long microsPerPixelColumn = 10000;
-unsigned long microsPerPixelEight = 0;
+volatile unsigned long microsPerPixelEight = 0;
 volatile unsigned long lastSpinTime = 0;
 unsigned long lastColumnTime = 0;
 
-int column = 0;
-int row = 0;
-int LEDEight = 0;
+volatile int column = 0;
+volatile int row = 0;
+volatile int LEDEight = 0;
 
 unsigned long inturruptDebounce = 200;
 
