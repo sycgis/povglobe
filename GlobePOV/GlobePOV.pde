@@ -17,12 +17,10 @@
 void setup() 
 {
  // Serial.begin(9600);
-  pinMode(2, INPUT);
-  lastSpinTime = micros();
-  attachInterrupt(SpinInterrupt, spinInterrupt, FALLING);
-
+ 
   pinMode(SpinInput, INPUT);
-
+  
+  lastSpinTime = micros();
 
   pinMode(col0, OUTPUT);
   pinMode(col1, OUTPUT);
@@ -61,7 +59,8 @@ void setup()
     digitalWrite(pins[j][1], LEDOrientation);
     delay(100);
   }
-  lastSpinTime = micros();
+  
+  attachInterrupt(SpinInterrupt, spinInterrupt, FALLING);
 
 }
 
@@ -69,6 +68,11 @@ bool inInterrupt = false;
 
 void spinInterrupt()
 {
+  if(lastSpinTime == 0)
+  {
+    lastSpinTime = micros();
+    return;
+  }
   if(!inInterrupt && micros() - lastSpinTime > inturruptDebounce)
   {
     inInterrupt = true;
@@ -135,7 +139,7 @@ void DrawLEDGroupsAtOnce(int eight, int column)
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
      
-  delayMicroseconds((microsPerPixelEight/2) - (timeOfWrite - micros()));
+  delayMicroseconds((microsPerPixelEight) - (timeOfWrite - micros()));
   
   lastEightOn = eight;
 }
