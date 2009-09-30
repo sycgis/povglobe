@@ -152,17 +152,17 @@ void DrawLEDGroupsAtOnce(int eight, int column)
   
   char imageEights = GetImageLEDEights(eight, column);
   
-  PORTB = PORTB & (imageEights & B11000000);
+  PORTB = (PORTB | B00110000) & ((imageEights << 4) & B00110000);
   PORTC = imageEights >> 2;
   
-//  digitalWrite(eightpins[0], bitRead(imageEights, 7));
-//  digitalWrite(eightpins[1], bitRead(imageEights, 6));
-//  digitalWrite(eightpins[2], bitRead(imageEights, 5));
-//  digitalWrite(eightpins[3], bitRead(imageEights, 4));
-//  digitalWrite(eightpins[4], bitRead(imageEights, 3));
-//  digitalWrite(eightpins[5], bitRead(imageEights, 2));
-//  digitalWrite(eightpins[6], bitRead(imageEights, 1));
-//  digitalWrite(eightpins[7], bitRead(imageEights, 0));
+//  digitalWrite(eightpins[0], bitRead(imageEights, 0));
+//  digitalWrite(eightpins[1], bitRead(imageEights, 1));
+//  digitalWrite(eightpins[2], bitRead(imageEights, 2));
+//  digitalWrite(eightpins[3], bitRead(imageEights, 3));
+//  digitalWrite(eightpins[4], bitRead(imageEights, 4));
+//  digitalWrite(eightpins[5], bitRead(imageEights, 5));
+//  digitalWrite(eightpins[6], bitRead(imageEights, 6));
+//  digitalWrite(eightpins[7], bitRead(imageEights, 7));
     
   digitalWrite(pins[row][0], !LEDOrientation);
      
