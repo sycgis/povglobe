@@ -6,6 +6,8 @@
 
 //#include "World72PixelBMPData.h"
 
+//#include "Pumpkin.h"
+
 #include "World2BitmapReverse.h"
 
 //#include "TestImage1.h"
