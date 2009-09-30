@@ -7,10 +7,9 @@ int column = 0;
 int row = 0;
 int LEDEight = 0;
 
-unsigned long inturruptDebounce = 100;
+unsigned long inturruptDebounce = 200;
 
-int eightpins[8] = {row0, row1, row2, row3, row4, row5, row6, row7}
-int columns[8] = {col0, col1, col2, col3, col4, col5, col6, col7}
+int eightpins[8][2] = {{row0, col0}, {row1, col1}, { row2, col2}, {row3, col3}, {row4, col4}, {row5, col5}, {row6, col6}, {row7, col7}};
 
 int pins[72][2] = {{col0, row0},
                     {col0, row1},

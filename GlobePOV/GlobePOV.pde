@@ -69,9 +69,13 @@ void spinInterrupt()
     if(micros()  - lastSpinTime < inturruptDebounce)
     {
       unsigned long spinTime = micros() - lastSpinTime;
+//      if(spinTime < (microsPerPixelColumn * (ImageColumns/2)))
+//      {
+//        return;
+//      }
       microsPerPixelColumn = spinTime / ImageColumns;
       microsPerPixelEight = microsPerPixelColumn / LEDEightsCount;
-      inturruptDebounce = max(10, spinTime / 2);
+      //inturruptDebounce = max(10, spinTime / 2);
       
       column = 0;
       row = 0;
@@ -82,25 +86,8 @@ void spinInterrupt()
   }
 }
 
-bool GetImagePoint(int row, int column)
-{
-  int picbit = pgm_read_byte(&(Image[row][column])); 
-  return picbit == 1;
-}
-
 void loop()
 {
-//  for(column = 0; column < ImageColumns; column++)
-//  {
-//    lastColumnTime = micros();
-//   // while(micros() - lastColumnTime < microsPerPixelColumn)
-//   // {
-//      for(row = 0; row < ImageRows ; row++)
-//      {
-//        DrawLED(column, row);
-//      }
-//   // }
-//  }
   for(column = 0; column < ImageColumns; column++)
   {
     for(LEDEight = 0; row < LEDEights ; LEDEight++)
@@ -120,25 +107,8 @@ void Clear()
   }
 }
 
-int lastRowOn = 0;
+int lastEightOn = 0;
 
-//columns are width
-//rows are hight (72 for 72 LEDS)
-void DrawLED(int column, int row)
-{
-//  //ROWS First for pins
-  digitalWrite(pins[lastRowOn][0], LEDOrientation);
-  digitalWrite(pins[lastRowOn][1], !LEDOrientation);
-  
-  //Serial.println("in draw led");
-  if(GetImagePoint(row, column))
-  {
-      //Serial.println(column);
-    digitalWrite(pins[row][0], !LEDOrientation);
-    digitalWrite(pins[row][1], LEDOrientation);
-    lastRowOn = row;
-  }
-}
 
 char GetImageLEDEights(int eight, int column)
 {
@@ -147,8 +117,7 @@ char GetImageLEDEights(int eight, int column)
 
 void DrawLEDGroupsAtOnce(int eight, int column)
 {
-//  //ROWS First for pins
-  digitalWrite(pins[lastRowOn][0], LEDOrientation);
+  digitalWrite(eightpins[lastEightOn][1], LEDOrientation);
   
   char imageEights = GetImageLEDEights(eight, column);
   
@@ -164,11 +133,10 @@ void DrawLEDGroupsAtOnce(int eight, int column)
 //  digitalWrite(eightpins[6], bitRead(imageEights, 6));
 //  digitalWrite(eightpins[7], bitRead(imageEights, 7));
     
-  digitalWrite(pins[row][0], !LEDOrientation);
+  digitalWrite(eightpins[eight][1], !LEDOrientation);
      
   delayMicroseconds(microsPerPixelEight);
   
-  lastRowOn = row;
-  
+  lastEightOn = eight;
 }
 
