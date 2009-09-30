@@ -69,7 +69,7 @@ bool inInterrupt = false;
 
 void spinInterrupt()
 {
-  if(!inInterrupt && micros()  - lastSpinTime < inturruptDebounce)
+  if(!inInterrupt && micros() - lastSpinTime > inturruptDebounce)
   {
     inInterrupt = true;
     unsigned long spinTime = micros() - lastSpinTime;
@@ -89,7 +89,7 @@ void loop()
 {
   for(column = 0; column < ImageColumns; column++)
   {
-    for(LEDEight = 0; row < LEDEights ; LEDEight++)
+    for(LEDEight = 0; LEDEight < LEDEights ; LEDEight++)
     {
       DrawLEDGroupsAtOnce(LEDEight, column);
     }
@@ -121,21 +121,21 @@ void DrawLEDGroupsAtOnce(int eight, int column)
   
   char imageEights = GetImageLEDEights(eight, column);
   
-  PORTB = (PORTB | B00110000) & ((imageEights << 4) & B00110000);
-  PORTC = imageEights >> 2;
+//  PORTB = (PORTB | B00110000) & ((imageEights << 4) & B00110000);
+//  PORTC = imageEights >> 2;
   
-//  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
-//  digitalWrite(eightpins[1][0], bitRead(imageEights, 1));
-//  digitalWrite(eightpins[2][0], bitRead(imageEights, 2));
-//  digitalWrite(eightpins[3][0], bitRead(imageEights, 3));
-//  digitalWrite(eightpins[4][0], bitRead(imageEights, 4));
-//  digitalWrite(eightpins[5][0], bitRead(imageEights, 5));
-//  digitalWrite(eightpins[6][0], bitRead(imageEights, 6));
-//  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
+  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
+  digitalWrite(eightpins[1][0], bitRead(imageEights, 1));
+  digitalWrite(eightpins[2][0], bitRead(imageEights, 2));
+  digitalWrite(eightpins[3][0], bitRead(imageEights, 3));
+  digitalWrite(eightpins[4][0], bitRead(imageEights, 4));
+  digitalWrite(eightpins[5][0], bitRead(imageEights, 5));
+  digitalWrite(eightpins[6][0], bitRead(imageEights, 6));
+  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
      
-  delayMicroseconds(microsPerPixelEight - (timeOfWrite - micros()));
+  delayMicroseconds((microsPerPixelEight/2) - (timeOfWrite - micros()));
   
   lastEightOn = eight;
 }
