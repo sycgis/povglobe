@@ -103,6 +103,7 @@ namespace BitmapToByteArray
                     bool isFirstInner = true;
 
                     int b = 0;
+                    string bstring = "";
                     for (int i = 0; i < size.Height; i++)
                     {
                         if (b == 0)
@@ -110,18 +111,26 @@ namespace BitmapToByteArray
                             builder.Append(isFirstInner ? "B" : ", B");
                             isFirstInner = false;
                         }
-                        
-                        builder.Append(bitmap.GetPixel(j, i).B == 255 ? 1 : 0);
+
+                        bstring = bstring.Insert(0, bitmap.GetPixel(j, i).B == 255 ? "1" : "0");
+                        //builder.Append(bitmap.GetPixel(j, i).B == 255 ? 1 : 0);
 
                         b++;
-                        if (b == 8) b = 0;
+                        if (b == 8)
+                        {
+                            builder.Append(bstring);
+                            bstring = "";
+                            b = 0;
+                        }
                     }
                     if (b > 0)
                     {
                         for (; b < 8; b++)
                         {
-                            builder.Append(0);
+                            bstring = bstring.Insert(0, "0");
+                            //builder.Append(0);
                         }
+                        builder.Append(bstring);
                     }
 
                     builder.Append("};");
