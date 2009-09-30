@@ -73,5 +73,65 @@ namespace BitmapToByteArray
 
             }
         }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            if (open.ShowDialog() == true)
+            {
+                Bitmap bitmap = new Bitmap(open.FileName);
+
+                var size = bitmap.Size;
+
+                StringBuilder builder = new StringBuilder();
+
+                builder.Append(string.Format(@"#define ImageColumns {0}
+#define ImageRows {1}
+#define LEDEights {2}
+
+
+",
+                                             size.Width, size.Height, size.Height/8));
+
+                builder.Append("prog_uchar Image[ImageColumns][LEDEights]   PROGMEM = {");
+
+                bool isFirst = true;
+                for (int j = 0; j < size.Width; j++)
+                {
+                    builder.Append(isFirst ? "{ " : ", {");
+                    isFirst = false;
+                    bool isFirstInner = true;
+
+                    int b = 0;
+                    for (int i = 0; i < size.Height; i++)
+                    {
+                        if (b == 0)
+                        {
+                            builder.Append(isFirstInner ? "B" : ", B");
+                            isFirstInner = false;
+                        }
+                        
+                        builder.Append(bitmap.GetPixel(j, i).B == 255 ? 1 : 0);
+
+                        b++;
+                        if (b == 8) b = 0;
+                    }
+                    if (b > 0)
+                    {
+                        for (; b < 8; b++)
+                        {
+                            builder.Append(0);
+                        }
+                    }
+
+                    builder.Append("};");
+                }
+                builder.Append(@"}
+                ");
+
+                textBox1.Text = builder.ToString();
+
+            }
+        }
     }
 }

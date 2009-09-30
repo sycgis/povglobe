@@ -14,12 +14,10 @@
   </NAntValidationSettings>
   <RecentFiles>
     <RecentFiles>
-      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="244" scrollPosition="0|5" />
-      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2158" scrollPosition="0|39" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="463" scrollPosition="0|7" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2757" scrollPosition="0|61" />
     </RecentFiles>
     <RecentEdits>
-      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="1" scrollPosition="0|0" />
-      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="244" scrollPosition="0|5" />
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="421" scrollPosition="0|4" />
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1213" scrollPosition="0|16" />
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1213" scrollPosition="0|16" />
@@ -28,6 +26,15 @@
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="1760" scrollPosition="0|48" />
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2034" scrollPosition="0|39" />
       <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2158" scrollPosition="0|39" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="1" scrollPosition="0|0" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml" caret="463" scrollPosition="0|7" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="4154" scrollPosition="0|73" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2566" scrollPosition="0|73" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="3256" scrollPosition="0|76" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="3350" scrollPosition="0|76" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="3792" scrollPosition="0|77" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="4003" scrollPosition="0|79" />
+      <File id="326CBA88-86AC-4D92-B670-A331FD2C0F88/f:Window1.xaml.cs" caret="2757" scrollPosition="0|61" />
     </RecentEdits>
   </RecentFiles>
   <UnitTestRunner>
@@ -43,7 +50,7 @@
       <Item value="using" priority="1" />
       <Item value="System" priority="1" />
       <Item value="new" priority="4" />
-      <Item value="if" priority="1" />
+      <Item value="if" priority="5" />
       <Item value="BitmapEffectProperty" priority="1" />
       <Item value="Bitmap" priority="1" />
       <Item value="byte" priority="0" />
@@ -56,13 +63,16 @@
       <Item value="bool" priority="0" />
       <Item value="isFirst" priority="4" />
       <Item value="false" priority="2" />
-      <Item value="b" priority="1" />
-      <Item value="size" priority="5" />
-      <Item value="for" priority="1" />
+      <Item value="b" priority="9" />
+      <Item value="size" priority="6" />
+      <Item value="for" priority="2" />
       <Item value="StringBuilder" priority="1" />
-      <Item value="builder" priority="3" />
+      <Item value="builder" priority="4" />
       <Item value="Width" priority="0" />
       <Item value="j" priority="0" />
+      <Item value="i" priority="0" />
+      <Item value="int" priority="0" />
+      <Item value="string" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:Microsoft.Win32.OpenFileDialog">
       <Item value="ShowDialog" priority="0" />
@@ -77,15 +87,21 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Drawing.Size">
       <Item value="Width" priority="3" />
-      <Item value="Height" priority="1" />
+      <Item value="Height" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Text.StringBuilder">
-      <Item value="Append" priority="2" />
+      <Item value="Append" priority="3" />
       <Item value="ToString" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Drawing.Color">
       <Item value="ToString" priority="0" />
       <Item value="B" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Int32">
+      <Item value="ToString" priority="0" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>

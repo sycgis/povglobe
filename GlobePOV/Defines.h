@@ -25,3 +25,5 @@
 //#define row9 22
 
 #define LEDOrientation true
+
+#define LEDEightsCount 9

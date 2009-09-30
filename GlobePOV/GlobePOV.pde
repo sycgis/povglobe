@@ -68,7 +68,12 @@ void spinInterrupt()
     {
       unsigned long spinTime = micros() - lastSpinTime;
       microsPerPixelColumn = spinTime / ImageColumns;
+      microsPerPixelEight = microsPerPixelColumn / LEDEightsCount;
       inturruptDebounce = max(10, spinTime / 2);
+      
+      column = 0;
+      row = 0;
+      
       lastSpinTime = micros();
     }
     inInterrupt = false;
@@ -83,12 +88,12 @@ bool GetImagePoint(int row, int column)
 
 void loop()
 {
-  for(int column = 0; column < ImageColumns; column++)
+  for(column = 0; column < ImageColumns; column++)
   {
     lastColumnTime = micros();
    // while(micros() - lastColumnTime < microsPerPixelColumn)
    // {
-      for(int row = 0; row < ImageRows ; row++)
+      for(row = 0; row < ImageRows ; row++)
       {
         DrawLED(column, row);
       }
@@ -123,5 +128,27 @@ void DrawLED(int column, int row)
     digitalWrite(pins[row][1], LEDOrientation);
     lastRowOn = row;
   }
+}
+
+void DrawLEDGroup(int column, int row)
+{
+//  //ROWS First for pins
+  digitalWrite(pins[lastRowOn][0], LEDOrientation);
+  
+  digitalWrite(pins[row][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 1][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 2][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 3][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 4][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 5][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 6][1], GetImagePoint(row, column));
+  digitalWrite(pins[row + 7][1], GetImagePoint(row, column));
+    
+  digitalWrite(pins[row][0], !LEDOrientation);
+     
+  delayMicroseconds(microsPerPixelEight);
+  
+  lastRowOn = row;
+  
 }
 
