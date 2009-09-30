@@ -4,6 +4,8 @@
 
 #include "World72PixelBMPData.h"
 
+//#include "World2BitmapReverse.h"
+
 //#include "TestImage1.h"
 
 #include "Globals.h"
@@ -88,17 +90,25 @@ bool GetImagePoint(int row, int column)
 
 void loop()
 {
+//  for(column = 0; column < ImageColumns; column++)
+//  {
+//    lastColumnTime = micros();
+//   // while(micros() - lastColumnTime < microsPerPixelColumn)
+//   // {
+//      for(row = 0; row < ImageRows ; row++)
+//      {
+//        DrawLED(column, row);
+//      }
+//   // }
+//  }
   for(column = 0; column < ImageColumns; column++)
   {
-    lastColumnTime = micros();
-   // while(micros() - lastColumnTime < microsPerPixelColumn)
-   // {
-      for(row = 0; row < ImageRows ; row++)
-      {
-        DrawLED(column, row);
-      }
-   // }
+    for(LEDEight = 0; row < LEDEights ; LEDEight++)
+    {
+      DrawLEDGroupsAtOnce(LEDEight, column);
+    }
   }
+
 }
 
 void Clear()
@@ -130,19 +140,29 @@ void DrawLED(int column, int row)
   }
 }
 
-void DrawLEDGroup(int column, int row)
+char GetImageLEDEights(int eight, int column)
+{
+  return pgm_read_byte(&(Image[eight][column])); 
+}
+
+void DrawLEDGroupsAtOnce(int eight, int column)
 {
 //  //ROWS First for pins
   digitalWrite(pins[lastRowOn][0], LEDOrientation);
   
-  digitalWrite(pins[row][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 1][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 2][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 3][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 4][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 5][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 6][1], GetImagePoint(row, column));
-  digitalWrite(pins[row + 7][1], GetImagePoint(row, column));
+  char imageEights = GetImageLEDEights(eight, column);
+  
+  PORTB = PORTB & (imageEights & B11000000);
+  PORTC = imageEights >> 2;
+  
+//  digitalWrite(eightpins[0], bitRead(imageEights, 7));
+//  digitalWrite(eightpins[1], bitRead(imageEights, 6));
+//  digitalWrite(eightpins[2], bitRead(imageEights, 5));
+//  digitalWrite(eightpins[3], bitRead(imageEights, 4));
+//  digitalWrite(eightpins[4], bitRead(imageEights, 3));
+//  digitalWrite(eightpins[5], bitRead(imageEights, 2));
+//  digitalWrite(eightpins[6], bitRead(imageEights, 1));
+//  digitalWrite(eightpins[7], bitRead(imageEights, 0));
     
   digitalWrite(pins[row][0], !LEDOrientation);
      
