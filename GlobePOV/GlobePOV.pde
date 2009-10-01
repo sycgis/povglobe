@@ -72,9 +72,11 @@ void spinInterrupt()
   if(!inInterrupt && micros() - lastSpinTime > inturruptDebounce)
   {
     inInterrupt = true;
-    unsigned long spinTime = micros() - lastSpinTime;
+    //unsigned long spinTime = micros() - lastSpinTime;
     
-    microsPerPixelColumn = spinTime / ImageColumns;
+   // microsPerPixelColumn = spinTime / ImageColumns;
+   
+   
     
     column = 0;
     LEDEight = 0;
@@ -92,7 +94,7 @@ void loop()
     {
       DrawLEDGroupsAtOnce(LEDEight, column);
     }
-    delayMicroseconds(microsPerPixelColumn);
+    //delayMicroseconds(microsPerPixelColumn);
   }
 
 }
@@ -120,7 +122,7 @@ void DrawLEDGroupsAtOnce(int eight, int column)
   
   prog_uint8_t imageEights = GetImageLEDEights(eight, column);
   
-  PORTB = (PORTB | B00110000) & ((imageEights << 4) | B11000000);
+  PORTB = (PORTB | B00110000) & ((imageEights << 4) | B11001111);
   PORTC = (PORTC | B00111111) & ((imageEights >> 2) | B11000000);
   
 //  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
