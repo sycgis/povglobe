@@ -4,11 +4,11 @@
 
 #include "Defines.h"
 
-//#include "World72PixelBMPData.h"
+#include "World72PixelBMPData.h"
 
 //#include "Pumpkin.h"
 
-#include "World2BitmapReverse.h"
+//#include "World2BitmapReverse.h"
 
 //#include "TestImage1.h"
 
@@ -41,11 +41,7 @@ void setup()
   pinMode(row6, OUTPUT);
   pinMode(row7, OUTPUT);
 
-  for(int j = 0; j < ImageRows; j++)
-  {
-    digitalWrite(pins[j][0], LEDOrientation);
-    digitalWrite(pins[j][1], !LEDOrientation);
-  }
+  Clear();
   
   //ALL ON
   for(int j = 0; j < ImageRows; j++)
@@ -57,7 +53,7 @@ void setup()
     }
     digitalWrite(pins[j][0], !LEDOrientation);
     digitalWrite(pins[j][1], LEDOrientation);
-    delay(100);
+    delay(30);
   }
   
   attachInterrupt(SpinInterrupt, spinInterrupt, FALLING);
@@ -79,7 +75,6 @@ void spinInterrupt()
     unsigned long spinTime = micros() - lastSpinTime;
     
     microsPerPixelColumn = spinTime / ImageColumns;
-    microsPerPixelEight = microsPerPixelColumn / LEDEightsCount;
     
     column = 0;
     LEDEight = 0;
@@ -97,6 +92,7 @@ void loop()
     {
       DrawLEDGroupsAtOnce(LEDEight, column);
     }
+    delayMicroseconds(microsPerPixelColumn);
   }
 
 }
@@ -120,13 +116,12 @@ char GetImageLEDEights(int eight, int column)
 
 void DrawLEDGroupsAtOnce(int eight, int column)
 {
-  unsigned long timeOfWrite = micros();
   digitalWrite(eightpins[lastEightOn][1], LEDOrientation);
   
-  char imageEights = GetImageLEDEights(eight, column);
+  prog_uint8_t imageEights = GetImageLEDEights(eight, column);
   
-  PORTB = (PORTB | B00110000) & ((imageEights << 4) & B00110000);
-  PORTC = imageEights >> 2;
+  PORTB = (PORTB | B00110000) & ((imageEights << 4) | B11000000);
+  PORTC = (PORTC | B00111111) & ((imageEights >> 2) | B11000000);
   
 //  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
 //  digitalWrite(eightpins[1][0], bitRead(imageEights, 1));
@@ -138,8 +133,6 @@ void DrawLEDGroupsAtOnce(int eight, int column)
 //  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
-     
- // delayMicroseconds((microsPerPixelEight) - (timeOfWrite - micros()));
   
   lastEightOn = eight;
 }

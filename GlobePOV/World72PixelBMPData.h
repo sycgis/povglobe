@@ -3,7 +3,7 @@
 #define LEDEights 9
 
 
-prog_uchar Image[ImageColumns][LEDEights] PROGMEM = {
+prog_uint8_t Image[ImageColumns][LEDEights] PROGMEM = {
   { 
     B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111  }
   , {
