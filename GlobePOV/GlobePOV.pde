@@ -4,6 +4,8 @@
 
 #include "Defines.h"
 
+//#include "Test.h"
+
 #include "World72PixelBMPData.h"
 
 //#include "Pumpkin.h"
@@ -61,7 +63,7 @@ void setup()
 }
 
 bool inInterrupt = false;
-
+unsigned long spinTime = 0;
 void spinInterrupt()
 {
   if(lastSpinTime == 0)
@@ -72,13 +74,31 @@ void spinInterrupt()
   if(!inInterrupt && micros() - lastSpinTime > inturruptDebounce)
   {
     inInterrupt = true;
-    //unsigned long spinTime = micros() - lastSpinTime;
+    unsigned long newSpinTime = micros() - lastSpinTime;
     
-   // microsPerPixelColumn = spinTime / ImageColumns;
-   
+    if(spinTime != 0 && (newSpinTime > spinTime*2 || newSpinTime < spinTime/2))
+    {
+      inInterrupt = false;
+      return;
+    }
+    spinTime = newSpinTime;
+    
+    microsPerPixelColumn = spinTime / ImageColumns;
+    microsPerPixelEight = microsPerPixelColumn / LEDEights;
    
     
-    column = 0;
+    spinCount++;
+    if(spinCount > 20)
+    {
+      columnOffset++;
+      if(columnOffset >= ImageColumns)
+      {
+        columnOffset = 0;
+      }
+      spinCount = 0;
+    }
+    
+    column = columnOffset;
     LEDEight = 0;
     
     lastSpinTime = micros();
@@ -108,8 +128,6 @@ void Clear()
   }
 }
 
-int lastEightOn = 0;
-
 
 char GetImageLEDEights(int eight, int column)
 {
@@ -135,6 +153,11 @@ void DrawLEDGroupsAtOnce(int eight, int column)
 //  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
+  
+  if(microsPerPixelEight > 18)
+  {
+    delayMicroseconds(microsPerPixelEight - 18);
+  }
   
   lastEightOn = eight;
 }

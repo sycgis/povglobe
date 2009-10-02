@@ -7,7 +7,12 @@ volatile int column = 0;
 volatile int row = 0;
 volatile int LEDEight = 0;
 
-unsigned long inturruptDebounce = 50;
+int lastEightOn = 0;
+
+int columnOffset = 0;
+int spinCount = 0;
+
+unsigned long inturruptDebounce = 80;
 
 int eightpins[8][2] = {{row0, col0}, {row1, col1}, { row2, col2}, {row3, col3}, {row4, col4}, {row5, col5}, {row6, col6}, {row7, col7}};
 
