@@ -27,3 +27,5 @@
 #define LEDOrientation true
 
 #define LEDEightsCount 9
+
+#define ImageDisplayTime 60000

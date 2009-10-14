@@ -16,12 +16,17 @@
 
 #include "Globals.h"
 
+#include "Us.h"
+
 void setup() 
 {
  // Serial.begin(9600);
  
+ CurrentColumns = ImageColumns;
+ 
   pinMode(SpinInput, INPUT);
   
+  lastImageChange = millis();
   lastSpinTime = micros();
 
   pinMode(col0, OUTPUT);
@@ -83,20 +88,40 @@ void spinInterrupt()
     }
     spinTime = newSpinTime;
     
-    microsPerPixelColumn = spinTime / ImageColumns;
+    if(millis() - lastImageChange > ImageDisplayTime)
+    {
+        lastImageChange = millis();
+        image++;
+        if(image > 1)
+        {
+          image = 0;
+        }
+        switch(image)
+        {
+        case 0:
+          CurrentColumns = ImageColumns;
+        case 1:
+           CurrentColumns = Image2Columns;
+        }
+        spinCount = 0;
+    }
+    
+    microsPerPixelColumn = spinTime / CurrentColumns;
     microsPerPixelEight = microsPerPixelColumn / LEDEights;
    
     
     spinCount++;
     if(spinCount > 20)
     {
-      columnOffset++;
-      if(columnOffset >= ImageColumns)
+      columnOffset+=2;
+      if(columnOffset >= CurrentColumns)
       {
         columnOffset = 0;
       }
       spinCount = 0;
     }
+    
+    
     
     column = columnOffset;
     LEDEight = 0;
@@ -108,7 +133,7 @@ void spinInterrupt()
 
 void loop()
 {
-  for(column = 0; column < ImageColumns; column++)
+  for(column = 0; column < CurrentColumns; column++)
   {
     for(LEDEight = 0; LEDEight < LEDEights ; LEDEight++)
     {
@@ -131,34 +156,32 @@ void Clear()
 
 char GetImageLEDEights(int eight, int column)
 {
-  return pgm_read_byte(&(Image[column][eight])); 
+  switch(image)
+  {
+  case 0:
+    return pgm_read_byte(&(Image[column][eight])); 
+  case 1:
+     return pgm_read_byte(&(Image2[column][eight])); 
+  }
 }
 
 void DrawLEDGroupsAtOnce(int eight, int column)
 {
-  digitalWrite(eightpins[lastEightOn][1], LEDOrientation);
+  //digitalWrite(eightpins[lastEightOn][1], LEDOrientation);
   
   prog_uint8_t imageEights = GetImageLEDEights(eight, column);
   
   PORTB = (PORTB | B00110000) & ((imageEights << 4) | B11001111);
   PORTC = (PORTC | B00111111) & ((imageEights >> 2) | B11000000);
-  
-//  digitalWrite(eightpins[0][0], bitRead(imageEights, 0));
-//  digitalWrite(eightpins[1][0], bitRead(imageEights, 1));
-//  digitalWrite(eightpins[2][0], bitRead(imageEights, 2));
-//  digitalWrite(eightpins[3][0], bitRead(imageEights, 3));
-//  digitalWrite(eightpins[4][0], bitRead(imageEights, 4));
-//  digitalWrite(eightpins[5][0], bitRead(imageEights, 5));
-//  digitalWrite(eightpins[6][0], bitRead(imageEights, 6));
-//  digitalWrite(eightpins[7][0], bitRead(imageEights, 7));
     
   digitalWrite(eightpins[eight][1], !LEDOrientation);
   
-  if(microsPerPixelEight > 18)
+  if(microsPerPixelEight > 20)//18
   {
-    delayMicroseconds(microsPerPixelEight - 18);
+    delayMicroseconds(microsPerPixelEight - 20);//18
   }
   
-  lastEightOn = eight;
+  digitalWrite(eightpins[eight][1], LEDOrientation);
+  //lastEightOn = eight;
 }
 

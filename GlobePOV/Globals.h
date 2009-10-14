@@ -3,9 +3,15 @@ volatile unsigned long microsPerPixelEight = 0;
 volatile unsigned long lastSpinTime = 0;
 unsigned long lastColumnTime = 0;
 
+unsigned long lastImageChange = 0;
+
 volatile int column = 0;
 volatile int row = 0;
 volatile int LEDEight = 0;
+
+volatile int CurrentColumns = 0;
+
+volatile int image = 0;
 
 int lastEightOn = 0;
 
