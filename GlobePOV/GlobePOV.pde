@@ -16,7 +16,9 @@
 
 #include "Globals.h"
 
-#include "Us.h"
+#include "HackADaySmall.h"
+
+//#include "Us.h"
 
 void setup() 
 {
@@ -113,7 +115,7 @@ void spinInterrupt()
     spinCount++;
     if(spinCount > 20)
     {
-      columnOffset+=2;
+      columnOffset++;
       if(columnOffset >= CurrentColumns)
       {
         columnOffset = 0;
@@ -184,4 +186,5 @@ void DrawLEDGroupsAtOnce(int eight, int column)
   digitalWrite(eightpins[eight][1], LEDOrientation);
   //lastEightOn = eight;
 }
+
 
